@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Risk Box | 全球金融聯防架構</title>
+    <title>Risk Box | 全球金融聯防網絡</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
@@ -169,8 +169,8 @@
 <div class="container">
     
     <section class="hero">
-        <h1>我的錢回不來了，但我不想再看到下一個我。</h1>
-        <p>這不是一家公司，這是一場針對洗錢集團的系統性審判。我們不求人買，我們定義標準。</p>
+        <h1>是的，我們是遭詐騙/洗錢的受害者，但我們不想再看到下一個受害者。</h1>
+        <p>我們不是一家公司，我們提供針對“正常/異常金融交易行為”毫秒級偵測的開放架構。</p>
         <a href="#tech" class="btn">進入核心架構</a>
     </section>
 
@@ -218,14 +218,17 @@
         <h2>核心技術規範 (Technical Specs)</h2>
         <p>基於 ISO-8583 金融標準電文之非對稱加權模型：</p>
 
-        <h3>1. 即時風險權值公式</h3>
+        <h3>1. AI 判讀邏輯</h3>
+        <p>行為 DNA 識別 (細節可參考)</p>
+        
+        <h3>2. 即時風險權值公式</h3>
         <p>定義每一筆交易的風險得分 \( R_{score} \)：</p>
         <div class="formula-box">
             $$R_{score} = \sum_{i \in DE} (W_i(t) \cdot \delta_i) + \Gamma$$
         </div>
         <p><small>* 當 \( R_{score} \geq 80 \)，系統將立即執行物理級阻斷。</small></p>
 
-        <h3>2. 多源協作信心度指數</h3>
+        <h3>3. 多源協作信心度指數</h3>
         <p>為防止數據污染，引入節點信任權限與空間相似度校驗：</p>
         <div class="formula-box">
             $$C = \frac{\sum_{j=1}^{m} (T_j \cdot S_j)}{\sqrt{\sum N_{rep} + \epsilon}}$$
@@ -241,8 +244,8 @@
 
     <section style="text-align: center;">
         <h2 style="color: var(--danger-color);">「別讓你的客戶，成為下一場悲劇。」</h2>
-        <p>本平台不接受商業贊助。僅開放技術節點接入申請。</p>
-        <a href="mailto:contact@riskbox.dev" class="btn">提交節點接入申請</a>
+        <p>本平台目前僅開放技術協作申請。</p>
+        <a href="mailto: thalese.studio@gmail.com" class="btn">提交加入協作申請</a>
     </section>
 
 </div>
