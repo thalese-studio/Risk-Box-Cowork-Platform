@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Box | 全球金融聯防架構</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #e0e0e0;
+            --accent-color: #00ff41; /* 駭客綠 */
+            --danger-color: #ff3e3e;
+            --card-bg: #161616;
+            --border-color: #333;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 2rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 4rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #888;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* 差異表樣式 */
+        .comparison-section {
+            margin-bottom: 6rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: #222;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        .highlight {
+            color: var(--accent-color);
+            font-weight: bold;
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        /* 技術規格區塊 */
+        .tech-spec {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-left: 4px solid var(--accent-color);
+            margin-bottom: 4rem;
+        }
+
+        .formula-box {
+            background: #000;
+            padding: 2rem;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            border: 1px dashed var(--border-color);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 4rem;
+            border-top: 1px solid var(--border-color);
+            color: #555;
+            font-size: 0.8rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: #000;
+            padding: 12px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #fff;
+            box-shadow: 0 0 20px var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            .container { width: 90%; }
+            .hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">RISK BOX</div>
+    <nav>
+        <a href="#comparison">效能對比</a>
+        <a href="#tech">技術規格</a>
+        <a href="mailto:contact@riskbox.dev">申請協作</a>
+    </nav>
+</header>
+
+<div class="container">
+    
+    <section class="hero">
+        <h1>我的錢回不來了，但我不想再看到下一個我。</h1>
+        <p>這不是一家公司，這是一場針對洗錢集團的系統性審判。我們不求人買，我們定義標準。</p>
+        <a href="#tech" class="btn">進入核心架構</a>
+    </section>
+
+    <section id="comparison" class="comparison-section">
+        <h2 style="text-align: center; margin-bottom: 2rem;">體制效能對比</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>維度</th>
+                    <th>傳統銀行防護 (Status Quo)</th>
+                    <th class="highlight">Risk Box 聯防協議</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>反應速度</td>
+                    <td>T+1 延遲（事後驗屍）</td>
+                    <td class="highlight">20ms 內毫秒級斷流</td>
+                </tr>
+                <tr>
+                    <td>防禦視野</td>
+                    <td>單打獨鬥，資訊孤島</td>
+                    <td class="highlight">全網同步，集體免疫</td>
+                </tr>
+                <tr>
+                    <td>偵測邏輯</td>
+                    <td>死板規則，易被繞過</td>
+                    <td class="highlight">ISO-8583 行為 DNA 演算</td>
+                </tr>
+                <tr>
+                    <td>物理安全性</td>
+                    <td>有 IP 對外，易受攻擊</td>
+                    <td class="highlight">L2 隱身，物理級不可見</td>
+                </tr>
+                <tr>
+                    <td>社會責任</td>
+                    <td>被動推託責任</td>
+                    <td class="highlight">主動掐斷洗錢水路</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="tech" class="tech-spec">
+        <h2>核心技術規範 (Technical Specs)</h2>
+        <p>基於 ISO-8583 金融標準電文之非對稱加權模型：</p>
+
+        <h3>1. 即時風險權值公式</h3>
+        <p>定義每一筆交易的風險得分 \( R_{score} \)：</p>
+        <div class="formula-box">
+            $$R_{score} = \sum_{i \in DE} (W_i(t) \cdot \delta_i) + \Gamma$$
+        </div>
+        <p><small>* 當 \( R_{score} \geq 80 \)，系統將立即執行物理級阻斷。</small></p>
+
+        <h3>2. 多源協作信心度指數</h3>
+        <p>為防止數據污染，引入節點信任權限與空間相似度校驗：</p>
+        <div class="formula-box">
+            $$C = \frac{\sum_{j=1}^{m} (T_j \cdot S_j)}{\sqrt{\sum N_{rep} + \epsilon}}$$
+        </div>
+
+        <h3>3. ISO-8583 關鍵監控矩陣</h3>
+        <ul>
+            <li><b>DE-7 / DE-11:</b> 傳輸頻次與審計追蹤。</li>
+            <li><b>DE-32 / DE-43:</b> 收單機構信譽與地理空間衝突。</li>
+            <li><b>DE-102:</b> 帳戶行為 DNA 雜湊處理。</li>
+        </ul>
+    </section>
+
+    <section style="text-align: center;">
+        <h2 style="color: var(--danger-color);">「別讓你的客戶，成為下一場悲劇。」</h2>
+        <p>本平台不接受商業贊助。僅開放技術節點接入申請。</p>
+        <a href="mailto:contact@riskbox.dev" class="btn">提交節點接入申請</a>
+    </section>
+
+</div>
+
+<div class="footer">
+    Risk Box Security Collaboration Network &copy; 2026<br>
+    標準已立，復仇永不停止。
+</div>
+
+</body>
+</html>
