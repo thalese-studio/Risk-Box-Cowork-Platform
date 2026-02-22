@@ -1,11 +1,12 @@
-<div id="content"></div>
-
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
+<section id="markdown-content"></section>
+
 <script>
-fetch("docs/Architecture.md")
-  .then(res => res.text())
+fetch('docs/Architecture.md')
+  .then(response => response.text())
   .then(text => {
-    document.getElementById("content").innerHTML = marked.parse(text);
+    document.getElementById('markdown-content').innerHTML =
+      marked.parse(text);
   });
 </script>
