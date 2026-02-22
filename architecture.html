@@ -1,3 +1,16 @@
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<section id="markdown-content"></section>
+
+<script>
+fetch('docs/Architecture.md')
+  .then(response => response.text())
+  .then(text => {
+    document.getElementById('markdown-content').innerHTML =
+      marked.parse(text);
+  });
+</script>
+
 <body>
     <div id="content" class="container">載入中...</div>
 
