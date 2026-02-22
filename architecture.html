@@ -1,36 +1,48 @@
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-<section id="markdown-content"></section>
-
-<script>
-fetch('docs/Architecture.md')
-  .then(response => response.text())
-  .then(text => {
-    document.getElementById('markdown-content').innerHTML =
-      marked.parse(text);
-  });
-</script>
-
-<body>
-    <div id="content" class="container">載入中...</div>
-
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技術架構規範 - Risk Box</title>
+    <style>
+        body { background-color: #0d1117; color: #c9d1d9; font-family: -apple-system, sans-serif; line-height: 1.6; padding: 20px; }
+        .container { max-width: 850px; margin: 0 auto; background: #161b22; padding: 30px; border-radius: 12px; border: 1px solid #30363d; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #58a6ff; text-decoration: none; }
+        /* 確保 Markdown 轉換後的圖片與公式不溢出 */
+        img { max-width: 100%; }
+        pre { background: #010409; padding: 15px; border-radius: 6px; overflow: auto; border: 1px solid #30363d; }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← 回到首頁</a>
+        
+        <div id="render-content">載入核心架構文件中...</div>
+    </div>
+
     <script>
-        // 自動抓取 docs/Architecture.md 並顯示
+        // 自動同步：抓取 docs 資料夾下的 Architecture.md
         fetch('docs/Architecture.md')
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) throw new Error('找不到檔案');
+                return response.text();
+            })
             .then(text => {
-                // 移除 Markdown 頂端的 Front Matter (如果有)
-                const cleanText = text.replace(/^---[\s\S]*?---/, '');
-                document.getElementById('content').innerHTML = marked.parse(cleanText);
+                // 轉換 Markdown 為 HTML
+                document.getElementById('render-content').innerHTML = marked.parse(text);
                 
-                // 重新觸發 MathJax 渲染公式
+                // 轉換完成後，通知 MathJax 渲染數學公式
                 if (window.MathJax) {
-                    MathJax.typesetPromise();
+                    window.MathJax.typesetPromise();
                 }
             })
             .catch(err => {
-                document.getElementById('content').innerHTML = "內容載入失敗，請確認檔案路徑。";
+                document.getElementById('render-content').innerHTML = 
+                    `<p style="color:#ff4d4d">載入失敗：請確認 docs/Architecture.md 檔案路徑與大小寫是否正確。</p>`;
             });
     </script>
 </body>
+</html>
