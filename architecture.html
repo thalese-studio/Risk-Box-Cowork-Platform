@@ -1,12 +1,23 @@
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<body>
+    <div id="content" class="container">載入中...</div>
 
-<section id="markdown-content"></section>
-
-<script>
-fetch('docs/Architecture.md')
-  .then(response => response.text())
-  .then(text => {
-    document.getElementById('markdown-content').innerHTML =
-      marked.parse(text);
-  });
-</script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        // 自動抓取 docs/Architecture.md 並顯示
+        fetch('docs/Architecture.md')
+            .then(response => response.text())
+            .then(text => {
+                // 移除 Markdown 頂端的 Front Matter (如果有)
+                const cleanText = text.replace(/^---[\s\S]*?---/, '');
+                document.getElementById('content').innerHTML = marked.parse(cleanText);
+                
+                // 重新觸發 MathJax 渲染公式
+                if (window.MathJax) {
+                    MathJax.typesetPromise();
+                }
+            })
+            .catch(err => {
+                document.getElementById('content').innerHTML = "內容載入失敗，請確認檔案路徑。";
+            });
+    </script>
+</body>
