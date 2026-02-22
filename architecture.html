@@ -4,45 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>技術架構規範 - Risk Box</title>
+    
     <style>
-        body { background-color: #0d1117; color: #c9d1d9; font-family: -apple-system, sans-serif; line-height: 1.6; padding: 20px; }
-        .container { max-width: 850px; margin: 0 auto; background: #161b22; padding: 30px; border-radius: 12px; border: 1px solid #30363d; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #58a6ff; text-decoration: none; }
-        /* 確保 Markdown 轉換後的圖片與公式不溢出 */
-        img { max-width: 100%; }
-        pre { background: #010409; padding: 15px; border-radius: 6px; overflow: auto; border: 1px solid #30363d; }
+        body { background-color: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.6; padding: 20px; margin: 0; }
+        .container { max-width: 850px; margin: 40px auto; background: #161b22; padding: 40px; border-radius: 12px; border: 1px solid #30363d; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .back-link { display: inline-block; margin-bottom: 25px; color: #58a6ff; text-decoration: none; font-weight: 500; transition: 0.2s; }
+        .back-link:hover { color: #1f6feb; text-decoration: underline; }
+        
+        /* Markdown 內容樣式微調 */
+        #render-content h1, #render-content h2, #render-content h3 { color: #58a6ff; border-bottom: 1px solid #30363d; padding-bottom: 8px; margin-top: 24px; }
+        #render-content code { background-color: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-family: monospace; }
+        #render-content pre { background-color: #010409; padding: 16px; border-radius: 8px; overflow: auto; border: 1px solid #30363d; }
+        #render-content img { max-width: 100%; border-radius: 6px; }
+        
+        /* 公式容器美化 */
+        .mjx-chtml { font-size: 110% !important; }
+        
+        /* Mermaid 圖表自適應 */
+        .mermaid { background: #fff; border-radius: 8px; padding: 10px; margin: 20px 0; display: flex; justify-content: center; }
     </style>
+
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
+
     <div class="container">
-        <a href="index.html" class="back-link">← 回到首頁</a>
+        <a href="index.html" class="back-link">← 回到協作平台首頁</a>
         
-        <div id="render-content">載入核心架構文件中...</div>
+        <div id="render-content">載入技術架構規範中，請稍候...</div>
     </div>
 
     <script>
-        // 自動同步：抓取 docs 資料夾下的 Architecture.md
+        // 初始化 Mermaid
+        mermaid.initialize({ startOnLoad: false, theme: 'default' });
+
+        // 設定 Markdown 轉換選項
+        marked.setOptions({
+            breaks: true, // 支援換行
+            gfm: true     // 支援 GitHub 語法
+        });
+
+        // 執行同步抓取
         fetch('docs/Architecture.md')
             .then(response => {
-                if (!response.ok) throw new Error('找不到檔案');
+                if (!response.ok) throw new Error('無法讀取 docs/Architecture.md，請確認路徑與分支設定。');
                 return response.text();
             })
             .then(text => {
-                // 轉換 Markdown 為 HTML
-                document.getElementById('render-content').innerHTML = marked.parse(text);
-                
-                // 轉換完成後，通知 MathJax 渲染數學公式
+                // 1. 轉換 Markdown
+                const htmlContent = marked.parse(text);
+                document.getElementById('render-content').innerHTML = htmlContent;
+
+                // 2. 觸發 MathJax 渲染公式 (處理 $...$ 與 $$...$$)
                 if (window.MathJax) {
                     window.MathJax.typesetPromise();
                 }
+
+                // 3. 處理 Mermaid 圖表 (尋找 language-mermaid 的 pre 標籤)
+                const mermaidBlocks = document.querySelectorAll('pre code.language-mermaid');
+                mermaidBlocks.forEach((block, i) => {
+                    const pre = block.parentElement;
+                    const div = document.createElement('div');
+                    div.className = 'mermaid';
+                    div.innerHTML = block.textContent;
+                    pre.parentElement.replaceChild(div, pre);
+                });
+                mermaid.run();
             })
             .catch(err => {
                 document.getElementById('render-content').innerHTML = 
-                    `<p style="color:#ff4d4d">載入失敗：請確認 docs/Architecture.md 檔案路徑與大小寫是否正確。</p>`;
+                    `<div style="color:#ff4d4d; border: 1px solid #ff4d4d; padding: 20px; border-radius: 8px;">
+                        <h3>載入失敗</h3>
+                        <p>${err.message}</p>
+                        <p>請檢查您的 main 分支下是否有 <strong>docs/Architecture.md</strong> 檔案。</p>
+                    </div>`;
             });
     </script>
+
 </body>
 </html>
