@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RISK BOX | 金融安全聯防基礎建設</title>
+
+<style>
+:root{
+--accent:#00ff41;
+--bg:#0a0a0a;
+--card:#111;
+--text:#e0e0e0;
+--dim:#888;
+--border:#222;
+}
+
+*{box-sizing:border-box}
+
+body{
+margin:0;
+background:var(--bg);
+color:var(--text);
+font-family:'Inter',system-ui,sans-serif;
+line-height:1.6;
+}
+
+.container{width:90%;max-width:1100px;margin:auto}
+
+header{
+position:sticky;top:0;
+display:flex;justify-content:space-between;align-items:center;
+height:70px;padding:0 5%;
+border-bottom:1px solid var(--border);
+background:rgba(10,10,10,0.9);
+backdrop-filter:blur(10px);
+z-index:1000;
+}
+
+.logo{
+font-weight:900;
+letter-spacing:2px;
+color:var(--accent);
+text-decoration:none;
+}
+
+nav a{
+margin-left:20px;
+color:var(--dim);
+text-decoration:none;
+font-size:.8rem;
+}
+
+nav a:hover{color:var(--accent)}
+
+.hero{
+text-align:center;
+padding:110px 0 70px;
+}
+
+.hero h1{
+font-size:3rem;
+line-height:1.2;
+margin-bottom:25px;
+}
+
+.hero p{
+max-width:700px;
+margin:auto;
+color:var(--dim);
+font-size:1.05rem;
+}
+
+.quick-links{
+margin-top:35px;
+font-size:.8rem;
+letter-spacing:1px;
+}
+
+.quick-links a{
+color:var(--accent);
+margin:0 10px;
+text-decoration:none;
+}
+
+.section{
+padding:80px 0;
+border-top:1px solid var(--border);
+}
+
+.section h2{
+text-align:center;
+margin-bottom:25px;
+}
+
+.problem,.value{
+max-width:760px;
+margin:auto;
+text-align:center;
+color:var(--dim);
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr;
+gap:22px;
+margin-top:40px;
+}
+
+.card{
+background:var(--card);
+border:1px solid var(--border);
+padding:26px;
+border-radius:8px;
+}
+
+.card h4{color:var(--accent);margin-bottom:10px}
+
+.join-box{
+text-align:center;
+margin-top:40px;
+}
+
+.btn{
+display:inline-block;
+padding:15px 30px;
+margin:8px;
+font-weight:bold;
+text-decoration:none;
+border-radius:4px;
+letter-spacing:1px;
+}
+
+.primary{background:var(--accent);color:#000}
+.outline{border:1px solid var(--accent);color:var(--accent)}
+
+footer{
+padding:60px 0;
+text-align:center;
+border-top:1px solid var(--border);
+color:#666;
+font-size:.75rem;
+}
+
+.footer-links{
+margin-bottom:20px;
+}
+
+.footer-links a{
+color:#888;
+margin:0 12px;
+text-decoration:none;
+}
+
+.footer-links a:hover{
+color:var(--accent);
+}
+
+@media(min-width:768px){
+.hero h1{font-size:3.8rem}
+.grid{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a class="logo">RISK BOX</a>
+<nav>
+<a href="architecture.html">技術架構</a>
+<a href="scenarios.html">應用情境</a>
+<a href="manifesto.html">開放宣言</a>
+<a href="whitepaper.pdf">白皮書</a>
+<a href="mailto:thalese.studio@gmail.com">聯絡我們</a>
+</nav>
+</header>
+
+<div class="container hero">
+<h1>
+風險發生的那一秒<br>
+你，看得見嗎？
+</h1>
+
+<p>
+詐騙與洗錢已經產業化、自動化、全球化。  
+資金流動速度遠遠超過通報、調查與法律流程。
+</p>
+
+<div class="quick-links">
+快速了解：
+<a href="architecture.html">技術架構</a> •
+<a href="scenarios.html">應用情境</a> •
+<a href="manifesto.html">開放宣言</a>
+</div>
+</div>
+
+<section class="section">
+<div class="container">
+<h2>我們正面對新的金融戰場</h2>
+<p class="problem">
+跨境詐欺、洗錢集團與自動化攻擊正在形成地下金融基礎設施。  
+單一機構防禦，無法阻止資金在數秒內被分流與消失。
+</p>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<h2>Risk Box 是什麼？</h2>
+<p class="value">
+Risk Box 是開放架構的風險感知節點，  
+在資產流出前毫秒內偵測異常並觸發聯防機制，  
+讓風險資訊即時共享與反應。
+</p>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<h2>為什麼需要聯防</h2>
+
+<div class="grid">
+<div class="card">
+<h4>詐騙是跨機構行為</h4>
+資金在銀行、支付與交易所間快速流動，
+單點防禦無法阻止外流。
+</div>
+
+<div class="card">
+<h4>時間決定勝負</h4>
+當偵測與通報需要數小時，
+資金早已分散至全球節點。
+</div>
+
+<div class="card">
+<h4>需要新的安全基礎建設</h4>
+即時風險共享與協同反應，
+才是真正有效的防禦。
+</div>
+</div>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<h2>加入這項計畫的價值</h2>
+
+<div class="grid">
+<div class="card">
+<h4>建立下一代安全標準</h4>
+共同制定金融風險感知架構。
+</div>
+
+<div class="card">
+<h4>取得第一線攻防經驗</h4>
+在真實場景中測試與優化策略。
+</div>
+
+<div class="card">
+<h4>打造跨機構聯防網絡</h4>
+讓安全不再是孤島，而是網絡。
+</div>
+</div>
+
+<div class="join-box">
+<a href="mailto:thalese.studio@gmail.com" class="btn primary">申請加入協作</a>
+<a href="architecture.html" class="btn outline">閱讀技術架構</a>
+</div>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<h2>開放架構宣言</h2>
+<p class="value">
+金融安全不應建立在封閉與孤立之上。  
+Risk Box 採開放架構設計，促進透明驗證與跨組織合作，
+共同打造全球金融安全基礎建設。
+</p>
+</div>
+</section>
+
+<footer>
+
+<div class="footer-links">
+<a href="architecture.html">技術架構</a>
+<a href="scenarios.html">應用情境</a>
+<a href="manifesto.html">開放宣言</a>
+<a href="whitepaper.pdf">白皮書</a>
+<a href="mailto:thalese.studio@gmail.com">聯絡窗口</a>
+</div>
+
+RISK BOX SECURITY NETWORK © 2026<br>
+不再讓公文的速度，決定資產的生死
+
+</footer>
+
+</body>
+</html>
