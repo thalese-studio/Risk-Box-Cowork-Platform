@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RISK BOX | 全球金融聯防架構</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --text-main: #e0e0e0;
+            --text-dim: #888;
+            --accent: #00ff41; /* 駭客綠 */
+            --border: #222;
+            --card-bg: #111;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            font-size: 15px;
+        }
+
+        /* 頂部導航列 - 與 Architecture 頁面同步 */
+        header {
+            height: 60px;
+            border-bottom: 1px solid var(--border);
+            padding: 0 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: var(--accent);
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--accent); }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 0;
+        }
+
+        /* 英雄區塊 - 調整比例與文案力量 */
+        .hero {
+            text-align: center;
+            padding: 40px 0 80px 0;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem; /* 縮減字體 */
+            line-height: 1.3;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to bottom, #fff, #999);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: var(--text-dim);
+            max-width: 650px;
+            margin: 0 auto 30px auto;
+        }
+
+        /* 按鈕樣式 */
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: #000;
+            padding: 12px 32px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 8px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+        .btn-outline:hover { background: rgba(0, 255, 65, 0.1); }
+
+        /* 對比表格優化 */
+        .comparison-section { margin-bottom: 100px; }
+        .comparison-section h2 { text-align: center; font-size: 1.5rem; margin-bottom: 40px; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+        }
+
+        th, td {
+            padding: 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        th {
+            background: #1a1a1a;
+            color: var(--accent);
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        .highlight { color: var(--accent); font-weight: 600; }
+
+        /* 技術規格卡片 */
+        .tech-spec {
+            background: var(--card-bg);
+            padding: 40px;
+            border-top: 2px solid var(--accent);
+            margin-bottom: 80px;
+        }
+
+        .tech-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .formula-box {
+            background: #000;
+            padding: 25px;
+            border-radius: 4px;
+            margin: 20px 0;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        /* 真心話區塊 */
+        .statement {
+            background: #111;
+            padding: 60px 40px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .statement h3 {
+            font-size: 1.2rem;
+            border-left: 3px solid #ff4d4d;
+            padding-left: 15px;
+            margin-bottom: 25px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 60px;
+            color: #444;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .container { width: 92%; }
+            header { padding: 0 5%; }
+            .hero h1 { font-size: 1.8rem; }
+            .tech-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">RISK BOX</div>
+    <nav>
+        <a href="#comparison">效能對比</a>
+        <a href="architecture.html">技術架構</a>
+        <a href="mailto:thalese.studio@gmail.com">申請協作</a>
+    </nav>
+</header>
+
+<div class="container">
+    
+    <section class="hero">
+        <h1>以受害者的覺醒<br>建立金流防禦的物理邊界</h1>
+        <p>我們不成立公司，我們定義標準。Risk Box 提供針對金融電文的毫秒級偵測架構，旨在將詐騙金流終結在門檻之內。</p>
+        <a href="architecture.html" class="btn">探索技術規格</a>
+    </section>
+
+    <section id="comparison" class="comparison-section">
+        <h2>體制效能對比</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>維度</th>
+                    <th>傳統銀行防護</th>
+                    <th class="highlight">RISK BOX 聯防協議</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>反應速度</td>
+                    <td>T+1 延遲處理</td>
+                    <td class="highlight">20ms 內即時斷流</td>
+                </tr>
+                <tr>
+                    <td>偵測邏輯</td>
+                    <td>靜態黑名單規則</td>
+                    <td class="highlight">ISO-8583 行為 DNA 演算</td>
+                </tr>
+                <tr>
+                    <td>安全性</td>
+                    <td>對外 IP 暴露</td>
+                    <td class="highlight">L2 隱身，物理級不可見</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="tech" class="tech-spec">
+        <div class="tech-header">
+            <h2 style="margin:0">核心技術規範</h2>
+            <a href="architecture.html" class="btn-outline">查看完整文檔 →</a>
+        </div>
+        
+        <p style="color:var(--text-dim)">基於非對稱加權模型之風險得分 \( R_{score} \)：</p>
+        <div class="formula-box">
+            $$R_{score} = \sum_{i \in DE} (W_i(t) \cdot \delta_i) + \Gamma$$
+        </div>
+        <p><small style="color:#666">* 此架構採用遞歸神經網路 (RNN) 建立動態行為特徵，而非傳統死板規則。</small></p>
+    </section>
+
+    <section class="statement">
+        <h3>發起人的真心話</h3>
+        <p style="color:#aaa">致所有依然相信善良的人：</p>
+        <p style="color:#ccc">我曾和你們一樣，因為信任而遍體鱗傷。直到我發現，真正的防禦只能建立在嚴密的邏輯之上。這是我對這個世界盡的一份努力，我已將防禦方案交給你們。</p>
+        <p style="font-style: italic; color: var(--accent); margin-top: 30px;">「別讓善良成為被欺凌的理由。」</p>
+        <div style="text-align: right; color: #555; font-size: 0.8rem; margin-top: 20px;">
+            — RISK BOX 創始研究員
+        </div>
+    </section>
+
+</div>
+
+<div class="footer">
+    RISK BOX SECURITY COLLABORATION NETWORK &copy; 2026<br>
+    讓風險可被看見的金融基礎建設
+</div>
+
+</body>
+  </html>
+  
