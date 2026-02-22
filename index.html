@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RISK BOX | 全球金融聯防架構</title>
+    <style>
+        :root { --accent: #00ff41; --bg: #0a0a0a; --card: #111; --text: #e0e0e0; --dim: #888; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; margin: 0; font-size: 14px; line-height: 1.6; }
+        
+        header { height: 60px; border-bottom: 1px solid #222; display: flex; justify-content: space-between; align-items: center; padding: 0 8%; background: rgba(10,10,10,0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 1.1rem; font-weight: 900; letter-spacing: 4px; color: var(--accent); }
+        nav a { color: var(--dim); text-decoration: none; margin-left: 25px; font-size: 0.8rem; letter-spacing: 1px; transition: 0.3s; }
+        nav a:hover { color: var(--accent); }
+
+        .hero { text-align: center; padding: 100px 10%; }
+        .hero h1 { font-size: 2.2rem; letter-spacing: -1px; margin-bottom: 20px; background: linear-gradient(to bottom, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { color: var(--dim); max-width: 600px; margin: 0 auto 40px; font-size: 1.05rem; }
+
+        .btn { border: 1px solid var(--accent); color: var(--accent); padding: 12px 30px; text-decoration: none; font-weight: bold; border-radius: 4px; font-size: 0.8rem; letter-spacing: 2px; transition: 0.3s; }
+        .btn:hover { background: var(--accent); color: #000; box-shadow: 0 0 20px rgba(0, 255, 65, 0.4); }
+
+        .real-time-feed { background: #000; border-y: 1px solid #222; padding: 40px 10%; margin: 60px 0; }
+        .feed-item { display: flex; justify-content: space-between; padding: 12px; background: #111; margin-bottom: 8px; border-left: 3px solid var(--accent); font-family: monospace; font-size: 0.85rem; }
+
+        .grid-cases { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding: 0 10% 100px; }
+        .case-card { background: var(--card); padding: 30px; border: 1px solid #222; border-radius: 4px; transition: 0.3s; }
+        .case-card:hover { border-color: #444; transform: translateY(-5px); }
+        .case-card h4 { color: var(--accent); margin-top: 0; letter-spacing: 1px; font-size: 1.1rem; }
+        .case-card p { color: var(--dim); font-size: 0.85rem; line-height: 1.8; }
+
+        .comparison { background: #050505; padding: 80px 10%; border-top: 1px solid #222; }
+        .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
+        .comp-box { padding: 30px; border: 1px solid #333; position: relative; }
+        
+        footer { text-align: center; padding: 60px; color: #444; font-size: 0.7rem; letter-spacing: 2px; border-top: 1px solid #222; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">RISK BOX</div>
+    <nav>
+        <a href="architecture.html">技術架構</a>
+        <a href="mailto:thalese.studio@gmail.com">申請協作</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>以受害者的覺醒<br>建立金流防禦的物理邊界</h1>
+    <p>我們定義標準，不只是防止詐騙。Risk Box 提供毫秒級偵測架構，將資產鎖死在非法出口之前。</p>
+    <a href="architecture.html" class="btn">VIEW TECHNICAL SPEC</a>
+</section>
+
+<div class="real-time-feed">
+    <div style="text-align: center; color: var(--dim); font-size: 0.75rem; margin-bottom: 20px; letter-spacing: 2px;">秒級聯防實時動態 (GLOBAL SIMULATION)</div>
+    <div class="feed-item" style="border-color: #f1c40f;"><span>[T+0.01s] 水房集群識別：裝置指紋異常重合</span><span style="color: #666;">執行：血液稀釋計畫</span></div>
+    <div class="feed-item" style="border-color: #9b59b6;"><span>[T+0.08s] 虛擬貨幣繞道：VASP 極速入金提幣</span><span style="color: #666;">執行：T+1 提幣鎖定</span></div>
+    <div class="feed-item" style="border-color: #e67e22;"><span>[T+0.15s] 地下匯兌偵測：對沖資金池共振標記</span><span style="color: #666;">執行：Pool Freezing</span></div>
+    <div class="feed-item" style="border-color: #58a6ff;"><span>[T+0.22s] 資產溯源啟動：全網虛擬鏈路標記</span><span style="color: #666;">執行：Circuit Breaker</span></div>
+</div>
+
+<div class="grid-cases">
+    <div class="case-card">
+        <h4>高齡資產保護</h4>
+        <p>當 80 歲帳戶出現階梯式金額增長，Risk Box 立即啟動「幽靈鎖定」，為受害者創造 20 分鐘的人道關懷窗口。</p>
+    </div>
+    <div class="case-card">
+        <h4>人頭帳戶獵殺</h4>
+        <p>監測沉睡帳戶的異常甦醒。利用 L2 攔截技術，讓洗錢電文在發出瞬間即因「通訊超時」而宣告失敗。</p>
+    </div>
+    <div class="case-card">
+        <h4>虛擬資產聯防</h4>
+        <p>打破銀行與交易所的資訊孤島。透過秒級廣播，讓數位資產在離開交易所前被物理截斷。</p>
+    </div>
+</div>
+
+<section class="comparison">
+    <h2 style="text-align: center; letter-spacing: 1px;">為什麼以前錢追不回來？</h2>
+    <div class="comp-grid">
+        <div class="comp-box">
+            <h4 style="color: var(--dim);">傳統體制：事後追蹤</h4>
+            <p style="font-size: 0.8rem; color: #555;">匯款 → 驚覺 → 報案 → 筆錄 → 公文發函 (48h+)</p>
+            <p style="color: #ff4d4d; font-weight: bold; border-top: 1px solid #222; padding-top: 15px;">結果：資金早已變換為虛擬資產出境。</p>
+        </div>
+        <div class="comp-box" style="border-color: var(--accent); background: rgba(0,255,65,0.02);">
+            <h4 style="color: var(--accent);">RISK BOX：秒級截斷</h4>
+            <p style="font-size: 0.8rem; color: var(--dim);">識別行為 → 秒級標記鏈路 → 下游同步掛起 (0.2s)</p>
+            <p style="color: var(--accent); font-weight: bold; border-top: 1px solid rgba(0,255,65,0.2); padding-top: 15px;">結果：資金鎖死在銀行體系，待原路領回。</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    RISK BOX SECURITY COLLABORATION NETWORK &copy; 2026<br>
+    不再讓公文的速度，決定資產的生死
+</footer>
+
+</body>
+</html>
