@@ -1,0 +1,11 @@
+<div id="content"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<script>
+fetch("docs/Architecture.md")
+  .then(res => res.text())
+  .then(text => {
+    document.getElementById("content").innerHTML = marked.parse(text);
+  });
+</script>
