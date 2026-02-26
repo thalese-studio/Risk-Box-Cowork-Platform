@@ -406,6 +406,106 @@
         <strong>💡 工程實作註記：</strong><br>
         當 <code>TRUST_BUILDING_PATTERN</code> 標籤出現時，系統應自動調高 <code>Confidence Index</code> 的敏感度，防止黑產透過「養號」模式規避 $R$ 值的權重檢測。
     </div>
+
+    <h2>十六、 AI 模型訓練資料集設計 (Data Schema)</h2>
+    <p>為了使 AI Logic Filter 持續演進，我們需要將非結構化的交易資料轉換為結構化的特徵矩陣。以下為核心 Data Schema 設計。</p>
+
+    <h3>16.1 特徵組件 (Feature Sets)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>特徵類別</th>
+                <th>欄位名稱 (Feature Key)</th>
+                <th>定義與轉換邏輯</th>
+                <th>資料類型</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowspan="3"><strong>時序行為 (T)</strong></td>
+                <td><code>t_freq_1h</code></td>
+                <td>過去 1 小時內交易次數 (Sliding Window)</td>
+                <td>Integer</td>
+            </tr>
+            <tr>
+                <td><code>t_amt_std_dev</code></td>
+                <td>近 20 筆交易金額之標準差 (偵測規避定額)</td>
+                <td>Float</td>
+            </tr>
+            <tr>
+                <td><code>t_avg_interval</code></td>
+                <td>交易平均間隔秒數 (偵測自動化腳本)</td>
+                <td>Float</td>
+            </tr>
+            <tr>
+                <td rowspan="3"><strong>拓撲關聯 (G)</strong></td>
+                <td><code>g_in_degree</code></td>
+                <td>入帳來源帳戶總數 (In-degree)</td>
+                <td>Integer</td>
+            </tr>
+            <tr>
+                <td><code>g_mule_link_dist</code></td>
+                <td>與已知黑名單的最短路徑距離 (Hop count)</td>
+                <td>Integer</td>
+            </tr>
+            <tr>
+                <td><code>g_device_overlap</code></td>
+                <td>該裝置指紋曾關聯過的帳戶總數</td>
+                <td>Integer</td>
+            </tr>
+            <tr>
+                <td rowspan="2"><strong>環境風險 (R)</strong></td>
+                <td><code>r_is_new_device</code></td>
+                <td>是否為 24 小時內首次出現之裝置指紋</td>
+                <td>Boolean (0/1)</td>
+            </tr>
+            <tr>
+                <td><code>r_asn_risk_level</code></td>
+                <td>IP 所屬 ASN 之歷史犯罪率評分</td>
+                <td>Float (0-1)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>16.2 標籤系統 (Labeling System)</h3>
+    <p>訓練集必須包含正確的「真值標籤 (Ground Truth)」，供 AI 學習：</p>
+    <ul>
+        <li><strong>Label 0 (Normal):</strong> 經由人工覆核或長期運作無報案紀錄。</li>
+        <li><strong>Label 1 (Fraud):</strong> 165 聯防確認受害者報案帳戶。</li>
+        <li><strong>Label 2 (Mule):</strong> 洗錢人頭戶（快進快出特徵明顯者）。</li>
+        <li><strong>Label 3 (Evasion):</strong> 測試性交易（頻繁失敗、跨行測卡等行為）。</li>
+    </ul>
+
+    <h3>16.3 訓練集輸出範例 (Training Record)</h3>
+    <pre>
+{
+  "label": 1,
+  "features": {
+    "t_freq_1h": 12,
+    "t_amt_std_dev": 15.5,
+    "g_in_degree": 8,
+    "g_mule_link_dist": 1,
+    "r_is_new_device": 1,
+    "behavior_context": "RAPID_DRAIN_PATTERN"
+  },
+  "metadata": {
+    "tx_id": "TX_998877",
+    "timestamp": "2026-02-26T01:10:00Z"
+  }
+}</pre>
+
+    <div class="highlight">
+        <strong>⚡ 工程實作：特徵工程自動化 Pipeline</strong><br>
+        1. <strong>抽取 (Extract):</strong> 從 Kafka 獲取即時報文。<br>
+        2. <strong>聚合 (Aggregate):</strong> 使用 Flink/Spark Streaming 計算窗口特徵（如 <code>t_freq_1h</code>）。<br>
+        3. <strong>落湖 (Data Lake):</strong> 將特徵向量寫入 Hudi/Iceberg 供離線模型訓練。
+    </div>
+
+    <div class="warning">
+        <strong>⚠️ 模型稽核重點：</strong><br>
+        AI Logic Filter 必須支持「特徵權重可視化 (SHAP Values)」，當 Event Level 為紅燈時，系統需顯示是哪些特徵（例如 <code>g_mule_link_dist</code>）導致了高風險判定，以符合監理稽核。
+    </div>
+    
 <style>
     .flowchart-container {
         background: #f9f9f9;
